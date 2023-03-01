@@ -1,15 +1,38 @@
-import { EventEmitter } from "@angular/core";
-import { Recipe } from "./recipe.model";
+import { EventEmitter, Injectable } from "@angular/core";
 
+import { Ingredient } from "../shared/ingredient.model";
+import { ShoppingListService } from "../shopping-list/shopping-list.service";
+import { Recipe } from "./recipe.model";
+@Injectable()
 export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
-  
+
   private recipes: Recipe[] = [
-    new Recipe('Test recipe', 'This is a test', 'https://www.theroastedroot.net/wp-content/uploads/2021/10/creamy-paleo-mushroom-chicken-7-720x1080.jpg.webp'),
-    new Recipe('Test recipe', 'This is another test', 'https://www.theroastedroot.net/wp-content/uploads/2021/10/creamy-paleo-mushroom-chicken-7-720x1080.jpg.webp')
+    new Recipe(
+      'Spaghetti Aglio e Olio',
+      'Traditional pasta from Italy',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.jpg/220px-Pizza-3007395.jpg',
+      [
+        new Ingredient('Pasta', 1),
+        new Ingredient('Olive oil', 3)
+      ]),
+    new Recipe(
+      'Pizza',
+      'What else you need to say?',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/250px-Aglio_e_olio.jpg',
+      [
+        new Ingredient('Flour', 50),
+        new Ingredient('Tomatoes', 5)
+      ])
   ];
+
+  constructor(private slService: ShoppingListService) {}
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 }
