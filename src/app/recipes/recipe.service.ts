@@ -12,26 +12,32 @@ export class RecipeService {
 
   recipeSelected = new Subject<Recipe>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Spaghetti Aglio e Olio',
-      'Traditional pasta from Italy',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/250px-Aglio_e_olio.jpg',
-      [
-        new Ingredient('Pasta', 1),
-        new Ingredient('Olive oil', 3)
-      ]),
-    new Recipe(
-      'Pizza',
-      'What else you need to say?',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.jpg/220px-Pizza-3007395.jpg',
-      [
-        new Ingredient('Flour', 50),
-        new Ingredient('Tomatoes', 5)
-      ])
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Spaghetti Aglio e Olio',
+  //     'Traditional pasta from Italy',
+  //     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/250px-Aglio_e_olio.jpg',
+  //     [
+  //       new Ingredient('Pasta', 1),
+  //       new Ingredient('Olive oil', 3)
+  //     ]),
+  //   new Recipe(
+  //     'Pizza',
+  //     'What else you need to say?',
+  //     'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.jpg/220px-Pizza-3007395.jpg',
+  //     [
+  //       new Ingredient('Flour', 50),
+  //       new Ingredient('Tomatoes', 5)
+  //     ])
+  // ];
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
