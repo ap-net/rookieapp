@@ -7,7 +7,7 @@ import {
 
 import { Recipe } from "../recipe.model";
 import { DataStorageService } from "src/app/shared/data-storage.service";
-import { Observable } from "rxjs";
+import { RecipeService } from "../recipe.service";
 
 @Injectable({providedIn: 'root'})
 export class RecipesResolverService implements Resolve<Recipe[]> {
@@ -19,7 +19,7 @@ export class RecipesResolverService implements Resolve<Recipe[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const recipes = this.recipesService.getRecipes();
 
-    if (recipes.lenght === 0) {
+    if (recipes.length === 0) {
       return this.dataStorageService.fetchRecipes();
     } else {
       return recipes;
