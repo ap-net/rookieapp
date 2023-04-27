@@ -55,17 +55,15 @@ export class AuthService {
     if (!userData) {
       return;
     }
-
     const loadedUser = new User(
       userData.email,
       userData.id,
       userData._token,
       new Date(userData._tokenExpirationDate)
-      );
-
-      if (loadedUser.token) {
-        this.user.next(loadedUser);
-      }
+     );
+     if (loadedUser.token) {
+      this.user.next(loadedUser);
+     }
   }
 
   logout() {
