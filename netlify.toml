@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/*"
-to = "header.component.html"
+to = "/header.component.html"
 status = 200
